@@ -1,0 +1,110 @@
+<div class="container fade-in">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="bi bi-calendar3-event-fill me-2"></i>
+                        {{ isEditMode ? 'Edit Conference' : 'Add New Conference' }}
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div *ngIf="error" class="alert alert-danger shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ error }}
+                    </div>
+
+                    <form [formGroup]="conferenceForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <label for="titre" class="form-label fw-bold">
+                                <i class="bi bi-card-heading me-1"></i>Title
+                            </label>
+                            <input type="text" class="form-control" id="titre" formControlName="titre"
+                                [class.is-invalid]="conferenceForm.get('titre')?.invalid && conferenceForm.get('titre')?.touched">
+                            <div class="invalid-feedback"
+                                *ngIf="conferenceForm.get('titre')?.invalid && conferenceForm.get('titre')?.touched">
+                                Title is required and must be at least 3 characters.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type" class="form-label fw-bold">
+                                <i class="bi bi-tag me-1"></i>Type
+                            </label>
+                            <select class="form-select" id="type" formControlName="type"
+                                [class.is-invalid]="conferenceForm.get('type')?.invalid && conferenceForm.get('type')?.touched">
+                                <option value="ACADEMIC">Academic</option>
+                                <option value="COMMERCIAL">Commercial</option>
+                            </select>
+                            <div class="invalid-feedback"
+                                *ngIf="conferenceForm.get('type')?.invalid && conferenceForm.get('type')?.touched">
+                                Type is required.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label fw-bold">
+                                <i class="bi bi-calendar-date me-1"></i>Date
+                            </label>
+                            <input type="date" class="form-control" id="date" formControlName="date"
+                                [class.is-invalid]="conferenceForm.get('date')?.invalid && conferenceForm.get('date')?.touched">
+                            <div class="invalid-feedback"
+                                *ngIf="conferenceForm.get('date')?.invalid && conferenceForm.get('date')?.touched">
+                                Date is required.
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="duree" class="form-label fw-bold">
+                                    <i class="bi bi-clock me-1"></i>Duration (hours)
+                                </label>
+                                <input type="number" class="form-control" id="duree" formControlName="duree"
+                                    [class.is-invalid]="conferenceForm.get('duree')?.invalid && conferenceForm.get('duree')?.touched">
+                                <div class="invalid-feedback"
+                                    *ngIf="conferenceForm.get('duree')?.invalid && conferenceForm.get('duree')?.touched">
+                                    Duration must be at least 1 hour.
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="inscrit" class="form-label fw-bold">
+                                    <i class="bi bi-people me-1"></i>Registered
+                                </label>
+                                <input type="number" class="form-control" id="inscrit" formControlName="inscrit"
+                                    [class.is-invalid]="conferenceForm.get('inscrit')?.invalid && conferenceForm.get('inscrit')?.touched">
+                                <div class="invalid-feedback"
+                                    *ngIf="conferenceForm.get('inscrit')?.invalid && conferenceForm.get('inscrit')?.touched">
+                                    Registered count must be 0 or more.
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="score" class="form-label fw-bold">
+                                    <i class="bi bi-star me-1"></i>Score
+                                </label>
+                                <input type="number" class="form-control" id="score" formControlName="score" step="0.1"
+                                    [class.is-invalid]="conferenceForm.get('score')?.invalid && conferenceForm.get('score')?.touched">
+                                <div class="invalid-feedback"
+                                    *ngIf="conferenceForm.get('score')?.invalid && conferenceForm.get('score')?.touched">
+                                    Score must be between 0 and 10.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading">
+                                <i class="bi bi-x-lg me-1"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="isLoading || conferenceForm.invalid">
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+                                <i *ngIf="!isLoading" class="bi bi-check-lg me-1"></i>
+                                {{ isEditMode ? 'Update' : 'Create' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

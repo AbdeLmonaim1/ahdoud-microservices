@@ -1,0 +1,82 @@
+<div class="container fade-in">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="bi bi-people-fill me-2"></i>
+                        {{ isEditMode ? 'Edit Keynote' : 'Add New Keynote' }}
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div *ngIf="error" class="alert alert-danger shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ error }}
+                    </div>
+
+                    <form [formGroup]="keynoteForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nom" class="form-label fw-bold">
+                                    <i class="bi bi-person me-1"></i>Last Name
+                                </label>
+                                <input type="text" class="form-control" id="nom" formControlName="nom"
+                                    [class.is-invalid]="keynoteForm.get('nom')?.invalid && keynoteForm.get('nom')?.touched">
+                                <div class="invalid-feedback"
+                                    *ngIf="keynoteForm.get('nom')?.invalid && keynoteForm.get('nom')?.touched">
+                                    Last name is required and must be at least 2 characters.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="prenom" class="form-label fw-bold">
+                                    <i class="bi bi-person me-1"></i>First Name
+                                </label>
+                                <input type="text" class="form-control" id="prenom" formControlName="prenom"
+                                    [class.is-invalid]="keynoteForm.get('prenom')?.invalid && keynoteForm.get('prenom')?.touched">
+                                <div class="invalid-feedback"
+                                    *ngIf="keynoteForm.get('prenom')?.invalid && keynoteForm.get('prenom')?.touched">
+                                    First name is required and must be at least 2 characters.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">
+                                <i class="bi bi-envelope me-1"></i>Email
+                            </label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                [class.is-invalid]="keynoteForm.get('email')?.invalid && keynoteForm.get('email')?.touched">
+                            <div class="invalid-feedback"
+                                *ngIf="keynoteForm.get('email')?.invalid && keynoteForm.get('email')?.touched">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fonction" class="form-label fw-bold">
+                                <i class="bi bi-briefcase me-1"></i>Function
+                            </label>
+                            <input type="text" class="form-control" id="fonction" formControlName="fonction"
+                                [class.is-invalid]="keynoteForm.get('fonction')?.invalid && keynoteForm.get('fonction')?.touched">
+                            <div class="invalid-feedback"
+                                *ngIf="keynoteForm.get('fonction')?.invalid && keynoteForm.get('fonction')?.touched">
+                                Function is required and must be at least 2 characters.
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading">
+                                <i class="bi bi-x-lg me-1"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary" [disabled]="isLoading || keynoteForm.invalid">
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+                                <i *ngIf="!isLoading" class="bi bi-check-lg me-1"></i>
+                                {{ isEditMode ? 'Update' : 'Create' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
