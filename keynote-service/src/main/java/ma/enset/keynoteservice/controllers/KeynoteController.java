@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/keynotes")
 @AllArgsConstructor
-@CrossOrigin("*")
 public class KeynoteController {
     private KeynoteService keynoteService;
 

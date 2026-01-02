@@ -12,7 +12,7 @@
     <artifactId>gateway-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gateway-service</name>
-    <description>API Gateway Service with Spring Cloud Gateway</description>
+    <description>gateway-service</description>
     <url/>
     <licenses>
         <license/>
@@ -31,27 +31,27 @@
         <spring-cloud.version>2025.0.1</spring-cloud.version>
     </properties>
     <dependencies>
-        <!-- Spring Cloud Gateway (Reactive) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
         </dependency>
-
-        <!-- Eureka Client for Service Discovery -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Actuator for Monitoring -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

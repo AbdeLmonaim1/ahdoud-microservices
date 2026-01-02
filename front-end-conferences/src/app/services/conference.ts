@@ -7,7 +7,7 @@ import { Conference } from '../models/conference.model';
   providedIn: 'root'
 })
 export class ConferenceService {
-  private apiUrl = 'http://localhost:8082/api/conferences'; // Assumed endpoint
+  private apiUrl = 'http://localhost:8888/conference-service/api/conferences'; // Via API Gateway
 
   constructor(private http: HttpClient) { }
 

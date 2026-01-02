@@ -7,7 +7,7 @@ import { Keynote } from '../models/keynote.model';
   providedIn: 'root'
 })
 export class KeynoteService {
-  private apiUrl = 'http://localhost:8081/api/keynotes'; // Assumed endpoint
+  private apiUrl = 'http://localhost:8888/keynote-service/api/keynotes'; // Via API Gateway
 
   constructor(private http: HttpClient) { }
 
